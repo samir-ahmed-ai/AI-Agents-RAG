@@ -1,0 +1,13 @@
+[project]
+name = "ai-agents-workspace"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "A monorepo for exploring different AI Agent frameworks."
+
+[tool.uv.workspace]
+members = [
+    "shared",
+    "langgraph-agents",
+    "llamaindex-agents",
+    "crewai-agents"
+]

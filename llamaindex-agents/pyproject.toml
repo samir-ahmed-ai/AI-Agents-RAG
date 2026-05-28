@@ -1,0 +1,26 @@
+[project]
+name = "llamaindex-agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "arize-phoenix>=14.6.0",
+    "asyncpg>=0.31.0",
+    "chainlit>=2.11.1",
+    "duckduckgo-search>=8.1.1",
+    "flagembedding",
+    "llama-index>=0.14.22",
+    "llama-index-callbacks-arize-phoenix>=0.7.0",
+    "llama-index-embeddings-huggingface>=0.7.0",
+    "llama-index-llms-ollama>=0.10.1",
+    "llama-index-postprocessor-flag-embedding-reranker>=0.5.0",
+    "llama-index-vector-stores-postgres>=0.8.1",
+    "psycopg2-binary>=2.9.12",
+    "python-dotenv>=1.2.2",
+    "shared",
+]
+
+[tool.uv.sources]
+shared = { workspace = true }
+flagembedding = { git = "https://github.com/FlagOpen/FlagEmbedding.git" }
