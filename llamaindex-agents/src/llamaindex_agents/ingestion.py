@@ -1,40 +1,21 @@
-import os
-import getpass
-from sqlalchemy import make_url
-from dotenv import load_dotenv
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, Document, Settings
-from llama_index.vector_stores.postgres import PGVectorStore
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, Document
+from llamaindex_agents.config import DATA_DIR, init_global_settings, get_pg_vector_store
 
-load_dotenv()
-
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data")
-
-def get_index():
-    # Setup fully local HuggingFace embedding model (no API key needed)
-    Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+def get_index() -> VectorStoreIndex | None:
+    """Builds or updates the LlamaIndex PGVectorStore index from documents in the data folder.
     
-    user = os.getenv("POSTGRES_USER", getpass.getuser())
-    password = os.getenv("POSTGRES_PASSWORD", "")
-    host = os.getenv("POSTGRES_HOST", "localhost")
-    port = os.getenv("POSTGRES_PORT", "5432")
-    db_name = os.getenv("POSTGRES_DB", "linearbits")
+    Initializes global embedding settings, reads documentation text files, and generates
+    dense embeddings locally before saving the vectors into Postgres.
+    """
+    # Set up fully local HuggingFace embedding model
+    init_global_settings()
 
     try:
-        # Initialize PGVectorStore with the new local table and smaller embed dimension (384)
-        vector_store = PGVectorStore.from_params(
-            database=db_name,
-            host=host,
-            password=password,
-            port=port,
-            user=user,
-            table_name="knowledge_base_local",
-            embed_dim=384,  # BAAI/bge-small-en-v1.5 dimension
-        )
-        
+        # Retrieve vector store setup from centralized config
+        vector_store = get_pg_vector_store()
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-        print("Building/Updating local Postgres index from documents using BAAI/bge-small-en-v1.5...")
+        print(f"Building/Updating local Postgres index from documents in '{DATA_DIR}' using BAAI/bge-small-en-v1.5...")
         try:
             documents = SimpleDirectoryReader(DATA_DIR).load_data()
         except ValueError:
