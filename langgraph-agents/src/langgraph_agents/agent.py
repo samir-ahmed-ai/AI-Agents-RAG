@@ -389,11 +389,15 @@ def run_agent():
             else:
                 print("\nAgent: I encountered an issue generating a response.")
                 
+        except EOFError:
+            print("\nExiting (stdin closed).")
+            break
         except KeyboardInterrupt:
             print("\nExiting...")
             break
         except Exception as e:
             print(f"\nAn error occurred: {e}")
+            break
 
 if __name__ == "__main__":
     run_agent()

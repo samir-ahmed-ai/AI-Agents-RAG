@@ -1,5 +1,7 @@
 .PHONY: start stop postgres-check ollama-check help dev ingest install ollama-install ollama-start ollama-pull crewai-run langgraph-run
 
+.DEFAULT_GOAL := start
+
 LLAMAINDEX_DIR := llamaindex-agents
 PYTHONPATH := src
 APP := src/llamaindex_agents/app.py
@@ -9,7 +11,7 @@ OLLAMA_MODEL ?= llama3.1
 help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
-start: postgres-check ollama-check ## [RECOMMENDED] Start all services (Postgres, Ollama, Landing Hub (BG), LlamaIndex Web (BG), CrewAI (BG), LangGraph CLI (FG))
+start: postgres-check ollama-check ## [RECOMMENDED] Start all services (Postgres, Ollama, Landing Hub, LlamaIndex Web, CrewAI) in background
 	@echo "========================================================================"
 	@echo "   🔥 BOOTING ALL LOCAL MONOREPO AGENTS & COOPERATIVE SERVICES 🔥"
 	@echo "========================================================================"
@@ -51,15 +53,24 @@ start: postgres-check ollama-check ## [RECOMMENDED] Start all services (Postgres
 		echo "  👉 CrewAI is auditing the codebase. Result will be in: 'code_audit_report.md'" \
 	)
 	@echo ""
-	@echo "🕸️  Launching LangGraph Stateful CLI Agent in the foreground..."
-	@echo "------------------------------------------------------------------------"
-	@PYTHONPATH=langgraph-agents/src .venv/bin/python langgraph-agents/main.py
+	@echo "========================================================================"
+	@echo "   ✅ All background services are up. Open the dashboard to begin."
+	@echo "========================================================================"
+	@echo "  🏠 Landing Hub:     http://localhost:3000"
+	@echo "  🖥️  LlamaIndex UI:   http://localhost:8000"
+	@echo "  🔍 Phoenix:         http://localhost:6006"
+	@echo "  👥 CrewAI audit:    code_audit_report.md (see crewai.log)"
+	@echo ""
+	@echo "  🕸️  LangGraph CLI:  run \`make langgraph-run\` for interactive mode"
+	@echo "  🛑 Stop everything: \`make stop\`"
+	@echo "========================================================================"
 
 stop: ## Stop all background running agents and servers (Landing Server, Chainlit, Phoenix, CrewAI)
 	@echo "🛑 Stopping all local agent background services..."
 	@(pkill -f "server.py 3000" || pkill -f "http.server 3000") && echo "  ✅ Stopped Central Landing Page / HTTP server." || echo "  ℹ️  Landing Page server is not running."
 	@pkill -f "chainlit run" && echo "  ✅ Stopped LlamaIndex Web UI / Chainlit server." || echo "  ℹ️  LlamaIndex Web UI is not running."
 	@pkill -f "crewai-agents/main.py" && echo "  ✅ Stopped CrewAI Auditor." || echo "  ℹ️  CrewAI Auditor is not running."
+	@pkill -f "langgraph-agents/main.py" && echo "  ✅ Stopped LangGraph Agent." || echo "  ℹ️  LangGraph Agent is not running."
 	@echo "✅ All background services stopped."
 
 postgres-check: ## Verify local Postgres is accepting connections, otherwise auto-starts Docker container
