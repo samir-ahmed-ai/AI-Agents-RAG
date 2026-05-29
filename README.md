@@ -8,7 +8,8 @@
   <a href="#screenshots">Screenshots</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="./RUNBOOK.md">Runbook</a> ·
-  <a href="./llamaindex-agents/ARCHITECTURE.md">LlamaIndex design</a>
+  <a href="./llamaindex-agents/ARCHITECTURE.md">LlamaIndex design</a> ·
+  <a href="./LICENSE">MIT License</a>
 </p>
 
 ---
