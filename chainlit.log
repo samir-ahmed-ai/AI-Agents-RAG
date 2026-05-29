@@ -1,0 +1,432 @@
+2026-05-28 13:47:22 - INFO - phoenix.config - 📋 Ensuring phoenix working directory: /Users/ahmedgmail/.phoenix
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.schemas
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.tables
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.types
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.constraints
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.defaults
+2026-05-28 13:47:22 - INFO - alembic.runtime.plugins - setup plugin alembic.autogenerate.comments
+/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/phoenix/server/api/routers/oauth2.py:12: AuthlibDeprecationWarning: authlib.jose module is deprecated, please use joserfc instead.
+It will be compatible before version 2.0.0.
+  from authlib.jose import jwt
+2026-05-28 13:47:25 - INFO - phoenix.config - 📋 Ensuring phoenix working directory: /Users/ahmedgmail/.phoenix
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Context impl SQLiteImpl.
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Will assume transactional DDL.
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade  -> cf03bd6bae1d, init
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade cf03bd6bae1d -> 10460e46d750, datasets
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade 10460e46d750 -> 3be8647b87d8, add token columns to spans table
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade 3be8647b87d8 -> cd164e83824f, users and tokens
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade cd164e83824f -> 4ded9e43755f, create project_session table
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade 4ded9e43755f -> bc8fea3c2bc8, Add prompt tables
+2026-05-28 13:47:25 - INFO - alembic.runtime.migration - Running upgrade bc8fea3c2bc8 -> 2f9d1a65945f, Annotation config migrations
+/Users/ahmedgmail/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py:144: SAWarning: Skipped unsupported reflection of expression-based index ix_cumulative_llm_token_count_total
+  next(self.gen)
+/Users/ahmedgmail/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py:144: SAWarning: Skipped unsupported reflection of expression-based index ix_latency
+  next(self.gen)
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 2f9d1a65945f -> bb8139330879, create project trace retention policies table
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade bb8139330879 -> 8a3764fe7f1a, change jsonb to json for prompts
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 8a3764fe7f1a -> 6a88424799fe, Add auth_method column to users table and migrate existing authentication data.
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 6a88424799fe -> a20694b15f82, Cost-related tables
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade a20694b15f82 -> 272b66ff50f8, drop single indices from traces, project_sessions, and experiment_runs
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 272b66ff50f8 -> 735d3d93c33e, add composite indices to traces and project_sessions
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 735d3d93c33e -> 0df286449799, add session annotations table
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 0df286449799 -> 01a8342c9cdf, add user_id on datasets
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 01a8342c9cdf -> ab513d89518b, add user_id on dataset_versions
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade ab513d89518b -> d0690a79ea51, add user_id on experiments
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade d0690a79ea51 -> 699f655af132, experiment_tags
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 699f655af132 -> 58228d933c91, dataset_labels
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 58228d933c91 -> e76cbd66ffc3, add experiments_dataset_examples junction table
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade e76cbd66ffc3 -> deb2c81c0bb2, dataset_splits
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade deb2c81c0bb2 -> 02463bd83119, add evaluators
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 02463bd83119 -> 3f53d82a1b7e, add custom_provider_id to prompt_versions
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 3f53d82a1b7e -> a1b2c3d4e5f6, Migrate LDAP users to dedicated auth_method and ldap_unique_id column.
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade a1b2c3d4e5f6 -> f1a6b2f0c9d5, add span session.id index
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade f1a6b2f0c9d5 -> 9c5c1f6bd0d2, add is_ephemeral to experiments
+2026-05-28 13:47:26 - INFO - alembic.runtime.migration - Running upgrade 9c5c1f6bd0d2 -> aba52fffe1a1, add experiment_jobs
+2026-05-28 13:47:26 - INFO - phoenix.server.api.builtin_evaluator_sync - Synced 5 builtin evaluators to database
+🌍 To view the Phoenix app in your browser, visit http://localhost:6006/
+📖 For more information on how to use Phoenix, check out https://arize.com/docs/phoenix
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-28 13:47:26 - WARNING - huggingface_hub.utils._http - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:26 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from BAAI/bge-small-en-v1.5.
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:26 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/README.md "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/modules.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+I0528 13:47:27.403568  471208 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+I0528 13:47:27.414065  471477 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(18, generation: 1)
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 11092.65it/s]
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:27 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:28 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:28 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:28 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-small-en-v1.5/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:28 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-small-en-v1.5/5c38ec7c405ec4b44b94cc5a9bb96e735b38267a/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:28 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-small-en-v1.5 "HTTP/1.1 200 OK"
+2026-05-28 13:47:28 - INFO - sentence_transformers.base.model - Loaded 1 prompt with these keys: ['query']
+2026-05-28 13:47:28 - INFO - chainlit - Your app is available at http://localhost:8000
+I0528 13:47:29.472907  471208 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+I0528 13:47:29.478943  471542 ev_poll_posix.cc:593] FD from fork parent still in poll list: fd(18, generation: 1)
+2026-05-28 13:47:29 - WARNING - chainlit - Translated markdown file for en-US not found. Defaulting to chainlit.md.
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:30 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 9747.32it/s]
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:31 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 20069.87it/s]
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:32 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:33 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 9893.27it/s]
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:34 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 14186.64it/s]
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:35 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 63, in ast_from_value
+    ast_value = ast_from_value(value, type_.of_type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:35 - ERROR - strawberry.execution - Cannot convert value to AST: {}.
+
+GraphQL request:62:7
+61 |       type { ...TypeRef }
+62 |       defaultValue
+   |       ^
+63 |       isDeprecated
+Traceback (most recent call last):
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/execution/execute.py", line 523, in execute_field
+    result = resolve_fn(source, info, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/type/introspection.py", line 516, in default_value
+    value_ast = ast_from_value(item[1].default_value, item[1].type)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ahmedgmail/Documents/workspace-1/personal/AI-Agents/.venv/lib/python3.12/site-packages/graphql/utilities/ast_from_value.py", line 136, in ast_from_value
+    raise TypeError(f"Cannot convert value to AST: {inspect(serialized)}.")
+TypeError: Cannot convert value to AST: {}.
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 13501.41it/s]
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:36 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:37 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:37 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:37 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 13429.36it/s]
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:38 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 14238.87it/s]
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:39 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:40 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 12791.20it/s]
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:41 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 13319.25it/s]
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:42 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 16672.04it/s]
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:44 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 13783.29it/s]
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:45 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:46 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-28 13:47:46 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: GET https://huggingface.co/api/models/BAAI/bge-reranker-base "HTTP/1.1 200 OK"
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/BAAI/bge-reranker-base/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/BAAI/bge-reranker-base/2cfc18c9415c912f9d8155881c133215df768a70/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 13377.58it/s]
+2026-05-28 13:47:47 - INFO - httpx - HTTP Request: POST http://localhost:11434/api/show "HTTP/1.1 200 OK"
+2026-05-28 13:48:02 - ERROR - strawberry.execution - Syntax Error: Unexpected <EOF>.
+
+GraphQL request:26:2
+25 | #   Auto Complete:  Ctrl-Space (or just start typing)
+26 | #
+   |  ^
+27 |

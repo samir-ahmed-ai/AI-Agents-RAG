@@ -19,6 +19,9 @@ dependencies = [
     "psycopg2-binary>=2.9.12",
     "python-dotenv>=1.2.2",
     "shared",
+    "psutil>=5.9.8",
+    "pypdf>=4.1.0",
+    "docx2txt>=0.8",
 ]
 
 [tool.uv.sources]

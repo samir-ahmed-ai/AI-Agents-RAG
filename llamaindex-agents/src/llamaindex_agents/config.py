@@ -78,3 +78,39 @@ def check_ollama() -> str | None:
         )
 
     return None
+
+def get_ollama_models() -> list[str]:
+    """Retrieves a list of all downloaded Ollama model names."""
+    try:
+        import json
+        url = f"{OLLAMA_BASE_URL}/api/tags"
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req, timeout=3) as response:
+            data = json.loads(response.read().decode())
+            # Return full tag names (e.g. 'llama3.1:latest', 'llava:latest')
+            return [model["name"] for model in data.get("models", [])]
+    except Exception:
+        return []
+
+def pull_ollama_model_stream(model_name: str):
+    """Streams pull progress of an Ollama model.
+    
+    Yields dictionary chunks with progress info.
+    """
+    import json
+    url = f"{OLLAMA_BASE_URL}/api/pull"
+    payload = json.dumps({"name": model_name}).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        # Long timeout for model downloading
+        with urllib.request.urlopen(req, timeout=1200) as response:
+            for line in response:
+                if line:
+                    yield json.loads(line.decode("utf-8").strip())
+    except Exception as e:
+        yield {"status": f"Error: {e}"}
+

@@ -1,6 +1,7 @@
-def main():
-    print("Hello from langgraph-agents!")
+from langgraph_agents.agent import run_agent
 
+def main():
+    run_agent()
 
 if __name__ == "__main__":
     main()

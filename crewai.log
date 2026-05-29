@@ -1,0 +1,810 @@
+========================================================================
+👥 STARTING LOCAL CREWAI MULTI-AGENT COLLABORATION
+🔗 Shared library check: Hello from the shared library!
+========================================================================
+📂 Gathering workspace files & diagnostics via Python...
+✅ Context gathered successfully! Injecting parameters into agent prompts...
+🤖 Configuring local LLM: ollama/llama3.1...
+👥 Creating Agents...
+📝 Mapping Tasks...
+🚀 Assembling Collaborative Crew...
+
+⚡ Kicking off local execution (Sequential Multi-Agent flow)...
+╭───────────────────────── 🚀 Crew Execution Started ──────────────────────────╮
+│                                                                              │
+│  Crew Execution Started                                                      │
+│  Name: crew                                                                  │
+│  ID: 2439eda1-621a-43f8-addb-38879169926d                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 📋 Task Started ───────────────────────────────╮
+│                                                                              │
+│  Task Started                                                                │
+│  Name: You have been provided with the following real-time data gathered     │
+│  directly from the local workspace:                                          │
+│                                                                              │
+│  === WORKSPACE FILES ===                                                     │
+│  📁 llamaindex_agents/__pycache__                                            │
+│  📄 llamaindex_agents/agent.py                                               │
+│  📄 llamaindex_agents/app.py                                                 │
+│  📄 llamaindex_agents/config.py                                              │
+│  📄 llamaindex_agents/ingestion.py                                           │
+│  📄 llamaindex_agents/tools.py                                               │
+│                                                                              │
+│  === CONFIG.PY IMPLEMENTATION ===                                            │
+│  ```python                                                                   │
+│  import os                                                                   │
+│  import getpass                                                              │
+│  import urllib.request                                                       │
+│  import urllib.error                                                         │
+│  from dotenv import load_dotenv                                              │
+│  from llama_index.core import Settings                                       │
+│  from llama_index.vector_stores.postgres import PGVectorStore                │
+│  from llama_index.embeddings.huggingface import HuggingFaceEmbedding         │
+│                                                                              │
+│  # Load environment variables from the .env file in llamaindex-agents        │
+│  # The app or scripts could be run from different relative directories, so   │
+│  we find the package root                                                    │
+│  PACKAGE_ROOT = os.path.dirname(os.path.abspath(__file__))                   │
+│  # Check for .env file up to two directories above the package root          │
+│  for parent_lvl in [os.path.dirname(PACKAGE_ROOT),                           │
+│  os.path.dirname(os.path.dirname(PACKAGE_ROOT))]:                            │
+│      env_path = os.path.join(parent_lvl, ".env")                             │
+│      if os.path.exists(env_path):                                            │
+│          load_dotenv(env_path, override=True)                                │
+│          break                                                               │
+│  else:                                                                       │
+│      load_dotenv()                                                           │
+│                                                                              │
+│  # Workspace paths                                                           │
+│  WORKSPACE_ROOT = os.path.abspath(os.path.join(PACKAGE_ROOT, "..", "..",     │
+│  ".."))                                                                      │
+│  DATA_DIR = os.path.abspath(os.path.join(PACKAGE_ROOT, "..", "..", "data"))  │
+│                                                                              │
+│  # Postgres configuration                                                    │
+│  POSTGRES_USER = os.getenv("POSTGRES_USER", getpass.getuser())               │
+│  POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")                      │
+│  POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")                     │
+│  POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")                          │
+│  POSTGRES_DB = os.getenv("POSTGRES_DB", "linearbits")                        │
+│  PG_TABLE_NAME = "knowledge_base_local"                                      │
+│  EMBED_DIM = 384  # BAAI/bge-small-en-v1.5 dimension                         │
+│                                                                              │
+│  # Ollama configuration                                                      │
+│  OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1")                        │
+│  OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")    │
+│                                                                              │
+│  # OpenAI API Key (For cloud ReAct CLI agent)                                │
+│  OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")                                │
+│                                                                              │
+│  def init_global_settings():                                                 │
+│      """Initializes global embeddings model settings for LlamaIndex."""      │
+│      Settings.embed_model =                                                  │
+│  HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")                   │
+│                                                                              │
+│  def get_pg_vector_store() -> PGVectorStore:                                 │
+│      """Creates and returns a PGVectorStore instance using the configured    │
+│  database parameters."""                                                     │
+│      return PGVectorStore.from_params(                                       │
+│          database=POSTGRES_DB,                                               │
+│          host=POSTGRES_HOST,                                                 │
+│          password=POSTGRES_PASSWORD,                                         │
+│          port=POSTGRES_PORT,                                                 │
+│          user=POSTGRES_USER,                                                 │
+│          table_name=PG_TABLE_NAME,                                           │
+│          embed_dim=EMBED_DIM,                                                │
+│      )                                                                       │
+│                                                                              │
+│  def check_ollama() -> str | None:                                           │
+│      """Verifies if the Ollama service is reachable and the required model   │
+│  is downloaded."""                                                           │
+│      try:                                                                    │
+│          url = f"{OLLAMA_BASE_URL}/api/tags"                                 │
+│          req = urllib.request.Request(url)                                   │
+│          with urllib.request.urlopen(req, timeout=5) as response:            │
+│              import json                                                     │
+│              data = json.loads(response.read().decode())                     │
+│      except (urllib.error.URLError, TimeoutError, OSError):                  │
+│          return (                                                            │
+│              "Ollama is not running. Install it from                         │
+│  https://ollama.com/download, "                                              │
+│              "then run `make ollama-start` and `make ollama-pull`."          │
+│          )                                                                   │
+│                                                                              │
+│      models = {model["name"] for model in data.get("models", [])}            │
+│      model_names = {name.split(":")[0] for name in models}                   │
+│      if OLLAMA_MODEL not in model_names and f"{OLLAMA_MODEL}:latest" not in  │
+│  models:                                                                     │
+│          return (                                                            │
+│              f"Ollama model `{OLLAMA_MODEL}` is not installed. "             │
+│              f"Run `make ollama-pull` or `ollama pull {OLLAMA_MODEL}`."      │
+│          )                                                                   │
+│                                                                              │
+│      return None                                                             │
+│                                                                              │
+│  def get_ollama_models() -> list[str]:                                       │
+│      """Retrieves a list of all downloaded Ollama model names."""            │
+│      try:                                                                    │
+│          import json                                                         │
+│          url = f"{OLLAMA_BASE_URL}/api/tags"                                 │
+│          req = urllib.request.Request(url)                                   │
+│          with urllib.request.urlopen(req, timeout=3) as response:            │
+│              data = json.loads(response.read().decode())                     │
+│              # Return full tag names (e.g. 'llama3.1:latest',                │
+│  'llava:latest')                                                             │
+│              return [model["name"] for model in data.get("models", [])]      │
+│      except Exception:                                                       │
+│          return []                                                           │
+│                                                                              │
+│  def pull_ollama_model_stream(model_name: str):                              │
+│      """Streams pull progress of an Ollama model.                            │
+│                                                                              │
+│      Yields dictionary chunks with progress info.                            │
+│      """                                                                     │
+│      import json                                                             │
+│      url = f"{OLLAMA_BASE_URL}/api/pull"                                     │
+│      payload = json.dumps({"name": model_name}).encode("utf-8")              │
+│      req = urllib.request.Request(                                           │
+│          url,                                                                │
+│          data=payload,                                                       │
+│          headers={"Content-Type": "application/json"}                        │
+│      )                                                                       │
+│      try:                                                                    │
+│          # Long timeout for model downloading                                │
+│          with urllib.request.urlopen(req, timeout=1200) as response:         │
+│              for line in response:                                           │
+│                  if line:                                                    │
+│                      yield json.loads(line.decode("utf-8").strip())          │
+│      except Exception as e:                                                  │
+│          yield {"status": f"Error: {e}"}                                     │
+│                                                                              │
+│                                                                              │
+│  ```                                                                         │
+│                                                                              │
+│  === TOOLS.PY IMPLEMENTATION ===                                             │
+│  ```python                                                                   │
+│  import os                                                                   │
+│  import psutil                                                               │
+│  from duckduckgo_search import DDGS                                          │
+│  from llama_index.core.tools import FunctionTool                             │
+│  from llamaindex_agents.config import WORKSPACE_ROOT                         │
+│                                                                              │
+│  def calculate(expression: str) -> str:                                      │
+│      """Evaluates a mathematical expression and returns the result.          │
+│                                                                              │
+│      Args:                                                                   │
+│          expression: A string containing a mathematical expression to        │
+│  evaluate (e.g. "2 + 2 * 10").                                               │
+│      """                                                                     │
+│      try:                                                                    │
+│          # Basic eval just for demonstration of tool usage.                  │
+│          # In a production app, use a safe math parser.                      │
+│          result = eval(expression, {"__builtins__": None}, {})               │
+│          return str(result)                                                  │
+│      except Exception as e:                                                  │
+│          return f"Error evaluating expression: {e}"                          │
+│                                                                              │
+│  def web_search(query: str) -> str:                                          │
+│      """Searches the web for the given query and returns a summary of        │
+│  results.                                                                    │
+│                                                                              │
+│      Args:                                                                   │
+│          query: The search query string.                                     │
+│      """                                                                     │
+│      try:                                                                    │
+│          with DDGS() as ddgs:                                                │
+│              results = ddgs.text(query, max_results=3)                       │
+│              if not results:                                                 │
+│                  return "No results found."                                  │
+│                                                                              │
+│              output = []                                                     │
+│              for r in results:                                               │
+│                  output.append(f"Title: {r.get('title')}\nSnippet:           │
+│  {r.get('body')}\nURL: {r.get('href')}\n")                                   │
+│              return "\n".join(output)                                        │
+│      except Exception as e:                                                  │
+│          return f"Error performing web search: {e}"                          │
+│                                                                              │
+│  def write_file(filename: str, content: str) -> str:                         │
+│      """Writes the given content to a file in the AI-Agents root workspace   │
+│  directory.                                                                  │
+│                                                                              │
+│      Args:                                                                   │
+│          filename: The name of the file to write to.                         │
+│          content: The text content to write into the file.                   │
+│      """                                                                     │
+│      try:                                                                    │
+│          filepath = os.path.abspath(os.path.join(WORKSPACE_ROOT, filename))  │
+│                                                                              │
+│          # Ensure we don't accidentally write outside the workspace          │
+│          if not filepath.startswith(os.path.abspath(WORKSPACE_ROOT)):        │
+│              return "Error: Cannot write outside the workspace directory."   │
+│                                                                              │
+│          with open(filepath, "w") as f:                                      │
+│              f.write(content)                                                │
+│          return f"Successfully wrote content to {filename}"                  │
+│      except Exception as e:                                                  │
+│          return f"Error writing file: {e}"                                   │
+│                                                                              │
+│  def system_monitor() -> str:                                                │
+│      """Monitor local system resources such as CPU and Memory.               │
+│                                                                              │
+│      Returns a string detailing the current host system's hardware           │
+│  utilization metrics.                                                        │
+│      """                                                                     │
+│      try:                                                                    │
+│          cpu_usage = psutil.cpu_percent(interval=0.5)                        │
+│          mem = psutil.virtual_memory()                                       │
+│          disk = psutil.disk_usage("/")                                       │
+│                                                                              │
+│          mem_total_gb = mem.total / (1024 ** 3)                              │
+│          mem_used_gb = mem.used / (1024 ** 3)                                │
+│          disk_total_gb = disk.total / (1024 ** 3)                            │
+│          disk_used_gb = disk.used / (1024 ** 3)                              │
+│                                                                              │
+│          return (                                                            │
+│              f"--- Host Machine System Resources ---\n"                      │
+│              f"🧠 CPU Utilization: {cpu_usage:.1f}%\n"                       │
+│              f"💾 Memory (RAM): {mem.percent:.1f}% ({mem_used_gb:.2f} GB /   │
+│  {mem_total_gb:.2f} GB)\n"                                                   │
+│              f"💽 Disk Space: {disk.percent:.1f}% ({disk_used_gb:.1f} GB /   │
+│  {disk_total_gb:.1f} GB)\n"                                                  │
+│              f"-------------------------------------"                        │
+│          )                                                                   │
+│      except Exception as e:                                                  │
+│          return f"Error monitoring system resources: {e}"                    │
+│                                                                              │
+│  def list_directory(relative_path: str = ".") -> str:                        │
+│      """Lists files and folders inside the workspace directory.              │
+│                                                                              │
+│      Args:                                                                   │
+│          relative_path: The folder to list, relative to the workspace root.  │
+│      """                                                                     │
+│      try:                                                                    │
+│          target_path = os.path.abspath(os.path.join(WORKSPACE_ROOT,          │
+│  relative_path))                                                             │
+│          if not target_path.startswith(os.path.abspath(WORKSPACE_ROOT)):     │
+│              return "Error: Cannot explore directories outside the           │
+│  workspace."                                                                 │
+│                                                                              │
+│          if not os.path.exists(target_path):                                 │
+│              return f"Error: Path '{relative_path}' does not exist."         │
+│                                                                              │
+│          if not os.path.isdir(target_path):                                  │
+│              return f"Error: Path '{relative_path}' is a file, not a         │
+│  directory."                                                                 │
+│                                                                              │
+│          entries = os.listdir(target_path)                                   │
+│          if not entries:                                                     │
+│              return f"Directory '{relative_path}' is empty."                 │
+│                                                                              │
+│          results = []                                                        │
+│          for entry in sorted(entries):                                       │
+│              full_entry = os.path.join(target_path, entry)                   │
+│              is_dir = os.path.isdir(full_entry)                              │
+│              marker = "📁" if is_dir else "📄"                               │
+│              results.append(f"{marker} {entry}")                             │
+│                                                                              │
+│          return f"Contents of '{relative_path}':\n" + "\n".join(results)     │
+│      except Exception as e:                                                  │
+│          return f"Error listing directory: {e}"                              │
+│                                                                              │
+│  def read_file(filename: str) -> str:                                        │
+│      """Reads the contents of a text file inside the workspace directory.    │
+│                                                                              │
+│      Args:                                                                   │
+│          filename: The path of the file to read, relative to the workspace   │
+│  root.                                                                       │
+│      """                                                                     │
+│      try:                                                                    │
+│          filepath = os.path.abspath(os.path.join(WORKSPACE_ROOT, filename))  │
+│          if not filepath.startswith(os.path.abspath(WORKSPACE_ROOT)):        │
+│              return "Error: Cannot read files outside the workspace."        │
+│                                                                              │
+│          if not os.path.exists(filepath):                                    │
+│              return f"Error: File '{filename}' does not exist."              │
+│                                                                              │
+│          if os.path.isdir(filepath):                                         │
+│              return f"Error: '{filename}' is a directory, not a file."       │
+│                                                                              │
+│          # Avoid reading massive files at once                               │
+│          file_size = os.path.getsize(filepath)                               │
+│          if file_size > 1 * 1024 * 1024:  # 1MB limit for safety             │
+│              return "Error: File is too large to read (max 1MB)."            │
+│                                                                              │
+│          with open(filepath, "r", encoding="utf-8", errors="ignore") as f:   │
+│              content = f.read()                                              │
+│          return f"--- Content of {filename}                                  │
+│  ---\n{content}\n-----------------------------"                              │
+│      except Exception as e:                                                  │
+│          return f"Error reading file: {e}"                                   │
+│                                                                              │
+│  def get_calculator_tool() -> FunctionTool:                                  │
+│      """Returns a LlamaIndex FunctionTool wrapping the calculate             │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=calculate,                                                       │
+│          name="calculator",                                                  │
+│          description="Useful for evaluating mathematical expressions and     │
+│  arithmetic calculations."                                                   │
+│      )                                                                       │
+│                                                                              │
+│  def get_web_search_tool() -> FunctionTool:                                  │
+│      """Returns a LlamaIndex FunctionTool wrapping the web_search            │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=web_search,                                                      │
+│          name="web_search",                                                  │
+│          description="Useful for searching the web for real-time             │
+│  information or questions you don't know the answer to."                     │
+│      )                                                                       │
+│                                                                              │
+│  def get_file_writer_tool() -> FunctionTool:                                 │
+│      """Returns a LlamaIndex FunctionTool wrapping the write_file            │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=write_file,                                                      │
+│          name="file_writer",                                                 │
+│          description="Useful for writing text content or agent reports into  │
+│  a file in the root workspace."                                              │
+│      )                                                                       │
+│                                                                              │
+│  def get_system_monitor_tool() -> FunctionTool:                              │
+│      """Returns a LlamaIndex FunctionTool wrapping the system_monitor        │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=system_monitor,                                                  │
+│          name="system_monitor",                                              │
+│          description="Useful for monitoring host system resources like CPU   │
+│  and RAM usage to verify machine load."                                      │
+│      )                                                                       │
+│                                                                              │
+│  def get_list_directory_tool() -> FunctionTool:                              │
+│      """Returns a LlamaIndex FunctionTool wrapping the list_directory        │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=list_directory,                                                  │
+│          name="list_directory",                                              │
+│          description="Useful for exploring the files and folders inside the  │
+│  local workspace root."                                                      │
+│      )                                                                       │
+│                                                                              │
+│  def get_read_file_tool() -> FunctionTool:                                   │
+│      """Returns a LlamaIndex FunctionTool wrapping the read_file             │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=read_file,                                                       │
+│          name="read_file",                                                   │
+│          description="Useful for reading text file content inside the        │
+│  workspace root."                                                            │
+│      )                                                                       │
+│                                                                              │
+│  def get_all_tools(include_file_writer: bool = True) -> list:                │
+│      """Returns a list of all standard tools available to agents.            │
+│                                                                              │
+│      Args:                                                                   │
+│          include_file_writer: If True, includes the file writer tool in the  │
+│  list.                                                                       │
+│      """                                                                     │
+│      tools = [                                                               │
+│          get_calculator_tool(),                                              │
+│          get_web_search_tool(),                                              │
+│          get_system_monitor_tool(),                                          │
+│          get_list_directory_tool(),                                          │
+│          get_read_file_tool()                                                │
+│      ]                                                                       │
+│      if include_file_writer:                                                 │
+│          tools.append(get_file_writer_tool())                                │
+│      return tools                                                            │
+│                                                                              │
+│                                                                              │
+│  ```                                                                         │
+│                                                                              │
+│  === HOST SYSTEM TELEMETRY ===                                               │
+│  🧠 CPU Utilization: 11.2%                                                   │
+│  💾 Memory (RAM): 63.3% (9.94 GB / 24.00 GB)                                 │
+│                                                                              │
+│  Your Task: Organize this information into a beautifully structured, highly  │
+│  readable Markdown Developer Transcript. Clearly list the files discovered,  │
+│  present the code implementations, and display the hardware loads.           │
+│  ID: 3ea2a0dd-da13-4eeb-abd4-92384d324124                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 🤖 Agent Started ──────────────────────────────╮
+│                                                                              │
+│  Agent: Senior Software Explorer                                             │
+│                                                                              │
+│  Task: You have been provided with the following real-time data gathered     │
+│  directly from the local workspace:                                          │
+│                                                                              │
+│  === WORKSPACE FILES ===                                                     │
+│  📁 llamaindex_agents/__pycache__                                            │
+│  📄 llamaindex_agents/agent.py                                               │
+│  📄 llamaindex_agents/app.py                                                 │
+│  📄 llamaindex_agents/config.py                                              │
+│  📄 llamaindex_agents/ingestion.py                                           │
+│  📄 llamaindex_agents/tools.py                                               │
+│                                                                              │
+│  === CONFIG.PY IMPLEMENTATION ===                                            │
+│  ```python                                                                   │
+│  import os                                                                   │
+│  import getpass                                                              │
+│  import urllib.request                                                       │
+│  import urllib.error                                                         │
+│  from dotenv import load_dotenv                                              │
+│  from llama_index.core import Settings                                       │
+│  from llama_index.vector_stores.postgres import PGVectorStore                │
+│  from llama_index.embeddings.huggingface import HuggingFaceEmbedding         │
+│                                                                              │
+│  # Load environment variables from the .env file in llamaindex-agents        │
+│  # The app or scripts could be run from different relative directories, so   │
+│  we find the package root                                                    │
+│  PACKAGE_ROOT = os.path.dirname(os.path.abspath(__file__))                   │
+│  # Check for .env file up to two directories above the package root          │
+│  for parent_lvl in [os.path.dirname(PACKAGE_ROOT),                           │
+│  os.path.dirname(os.path.dirname(PACKAGE_ROOT))]:                            │
+│      env_path = os.path.join(parent_lvl, ".env")                             │
+│      if os.path.exists(env_path):                                            │
+│          load_dotenv(env_path, override=True)                                │
+│          break                                                               │
+│  else:                                                                       │
+│      load_dotenv()                                                           │
+│                                                                              │
+│  # Workspace paths                                                           │
+│  WORKSPACE_ROOT = os.path.abspath(os.path.join(PACKAGE_ROOT, "..", "..",     │
+│  ".."))                                                                      │
+│  DATA_DIR = os.path.abspath(os.path.join(PACKAGE_ROOT, "..", "..", "data"))  │
+│                                                                              │
+│  # Postgres configuration                                                    │
+│  POSTGRES_USER = os.getenv("POSTGRES_USER", getpass.getuser())               │
+│  POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")                      │
+│  POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")                     │
+│  POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")                          │
+│  POSTGRES_DB = os.getenv("POSTGRES_DB", "linearbits")                        │
+│  PG_TABLE_NAME = "knowledge_base_local"                                      │
+│  EMBED_DIM = 384  # BAAI/bge-small-en-v1.5 dimension                         │
+│                                                                              │
+│  # Ollama configuration                                                      │
+│  OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1")                        │
+│  OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")    │
+│                                                                              │
+│  # OpenAI API Key (For cloud ReAct CLI agent)                                │
+│  OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")                                │
+│                                                                              │
+│  def init_global_settings():                                                 │
+│      """Initializes global embeddings model settings for LlamaIndex."""      │
+│      Settings.embed_model =                                                  │
+│  HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")                   │
+│                                                                              │
+│  def get_pg_vector_store() -> PGVectorStore:                                 │
+│      """Creates and returns a PGVectorStore instance using the configured    │
+│  database parameters."""                                                     │
+│      return PGVectorStore.from_params(                                       │
+│          database=POSTGRES_DB,                                               │
+│          host=POSTGRES_HOST,                                                 │
+│          password=POSTGRES_PASSWORD,                                         │
+│          port=POSTGRES_PORT,                                                 │
+│          user=POSTGRES_USER,                                                 │
+│          table_name=PG_TABLE_NAME,                                           │
+│          embed_dim=EMBED_DIM,                                                │
+│      )                                                                       │
+│                                                                              │
+│  def check_ollama() -> str | None:                                           │
+│      """Verifies if the Ollama service is reachable and the required model   │
+│  is downloaded."""                                                           │
+│      try:                                                                    │
+│          url = f"{OLLAMA_BASE_URL}/api/tags"                                 │
+│          req = urllib.request.Request(url)                                   │
+│          with urllib.request.urlopen(req, timeout=5) as response:            │
+│              import json                                                     │
+│              data = json.loads(response.read().decode())                     │
+│      except (urllib.error.URLError, TimeoutError, OSError):                  │
+│          return (                                                            │
+│              "Ollama is not running. Install it from                         │
+│  https://ollama.com/download, "                                              │
+│              "then run `make ollama-start` and `make ollama-pull`."          │
+│          )                                                                   │
+│                                                                              │
+│      models = {model["name"] for model in data.get("models", [])}            │
+│      model_names = {name.split(":")[0] for name in models}                   │
+│      if OLLAMA_MODEL not in model_names and f"{OLLAMA_MODEL}:latest" not in  │
+│  models:                                                                     │
+│          return (                                                            │
+│              f"Ollama model `{OLLAMA_MODEL}` is not installed. "             │
+│              f"Run `make ollama-pull` or `ollama pull {OLLAMA_MODEL}`."      │
+│          )                                                                   │
+│                                                                              │
+│      return None                                                             │
+│                                                                              │
+│  def get_ollama_models() -> list[str]:                                       │
+│      """Retrieves a list of all downloaded Ollama model names."""            │
+│      try:                                                                    │
+│          import json                                                         │
+│          url = f"{OLLAMA_BASE_URL}/api/tags"                                 │
+│          req = urllib.request.Request(url)                                   │
+│          with urllib.request.urlopen(req, timeout=3) as response:            │
+│              data = json.loads(response.read().decode())                     │
+│              # Return full tag names (e.g. 'llama3.1:latest',                │
+│  'llava:latest')                                                             │
+│              return [model["name"] for model in data.get("models", [])]      │
+│      except Exception:                                                       │
+│          return []                                                           │
+│                                                                              │
+│  def pull_ollama_model_stream(model_name: str):                              │
+│      """Streams pull progress of an Ollama model.                            │
+│                                                                              │
+│      Yields dictionary chunks with progress info.                            │
+│      """                                                                     │
+│      import json                                                             │
+│      url = f"{OLLAMA_BASE_URL}/api/pull"                                     │
+│      payload = json.dumps({"name": model_name}).encode("utf-8")              │
+│      req = urllib.request.Request(                                           │
+│          url,                                                                │
+│          data=payload,                                                       │
+│          headers={"Content-Type": "application/json"}                        │
+│      )                                                                       │
+│      try:                                                                    │
+│          # Long timeout for model downloading                                │
+│          with urllib.request.urlopen(req, timeout=1200) as response:         │
+│              for line in response:                                           │
+│                  if line:                                                    │
+│                      yield json.loads(line.decode("utf-8").strip())          │
+│      except Exception as e:                                                  │
+│          yield {"status": f"Error: {e}"}                                     │
+│                                                                              │
+│                                                                              │
+│  ```                                                                         │
+│                                                                              │
+│  === TOOLS.PY IMPLEMENTATION ===                                             │
+│  ```python                                                                   │
+│  import os                                                                   │
+│  import psutil                                                               │
+│  from duckduckgo_search import DDGS                                          │
+│  from llama_index.core.tools import FunctionTool                             │
+│  from llamaindex_agents.config import WORKSPACE_ROOT                         │
+│                                                                              │
+│  def calculate(expression: str) -> str:                                      │
+│      """Evaluates a mathematical expression and returns the result.          │
+│                                                                              │
+│      Args:                                                                   │
+│          expression: A string containing a mathematical expression to        │
+│  evaluate (e.g. "2 + 2 * 10").                                               │
+│      """                                                                     │
+│      try:                                                                    │
+│          # Basic eval just for demonstration of tool usage.                  │
+│          # In a production app, use a safe math parser.                      │
+│          result = eval(expression, {"__builtins__": None}, {})               │
+│          return str(result)                                                  │
+│      except Exception as e:                                                  │
+│          return f"Error evaluating expression: {e}"                          │
+│                                                                              │
+│  def web_search(query: str) -> str:                                          │
+│      """Searches the web for the given query and returns a summary of        │
+│  results.                                                                    │
+│                                                                              │
+│      Args:                                                                   │
+│          query: The search query string.                                     │
+│      """                                                                     │
+│      try:                                                                    │
+│          with DDGS() as ddgs:                                                │
+│              results = ddgs.text(query, max_results=3)                       │
+│              if not results:                                                 │
+│                  return "No results found."                                  │
+│                                                                              │
+│              output = []                                                     │
+│              for r in results:                                               │
+│                  output.append(f"Title: {r.get('title')}\nSnippet:           │
+│  {r.get('body')}\nURL: {r.get('href')}\n")                                   │
+│              return "\n".join(output)                                        │
+│      except Exception as e:                                                  │
+│          return f"Error performing web search: {e}"                          │
+│                                                                              │
+│  def write_file(filename: str, content: str) -> str:                         │
+│      """Writes the given content to a file in the AI-Agents root workspace   │
+│  directory.                                                                  │
+│                                                                              │
+│      Args:                                                                   │
+│          filename: The name of the file to write to.                         │
+│          content: The text content to write into the file.                   │
+│      """                                                                     │
+│      try:                                                                    │
+│          filepath = os.path.abspath(os.path.join(WORKSPACE_ROOT, filename))  │
+│                                                                              │
+│          # Ensure we don't accidentally write outside the workspace          │
+│          if not filepath.startswith(os.path.abspath(WORKSPACE_ROOT)):        │
+│              return "Error: Cannot write outside the workspace directory."   │
+│                                                                              │
+│          with open(filepath, "w") as f:                                      │
+│              f.write(content)                                                │
+│          return f"Successfully wrote content to {filename}"                  │
+│      except Exception as e:                                                  │
+│          return f"Error writing file: {e}"                                   │
+│                                                                              │
+│  def system_monitor() -> str:                                                │
+│      """Monitor local system resources such as CPU and Memory.               │
+│                                                                              │
+│      Returns a string detailing the current host system's hardware           │
+│  utilization metrics.                                                        │
+│      """                                                                     │
+│      try:                                                                    │
+│          cpu_usage = psutil.cpu_percent(interval=0.5)                        │
+│          mem = psutil.virtual_memory()                                       │
+│          disk = psutil.disk_usage("/")                                       │
+│                                                                              │
+│          mem_total_gb = mem.total / (1024 ** 3)                              │
+│          mem_used_gb = mem.used / (1024 ** 3)                                │
+│          disk_total_gb = disk.total / (1024 ** 3)                            │
+│          disk_used_gb = disk.used / (1024 ** 3)                              │
+│                                                                              │
+│          return (                                                            │
+│              f"--- Host Machine System Resources ---\n"                      │
+│              f"🧠 CPU Utilization: {cpu_usage:.1f}%\n"                       │
+│              f"💾 Memory (RAM): {mem.percent:.1f}% ({mem_used_gb:.2f} GB /   │
+│  {mem_total_gb:.2f} GB)\n"                                                   │
+│              f"💽 Disk Space: {disk.percent:.1f}% ({disk_used_gb:.1f} GB /   │
+│  {disk_total_gb:.1f} GB)\n"                                                  │
+│              f"-------------------------------------"                        │
+│          )                                                                   │
+│      except Exception as e:                                                  │
+│          return f"Error monitoring system resources: {e}"                    │
+│                                                                              │
+│  def list_directory(relative_path: str = ".") -> str:                        │
+│      """Lists files and folders inside the workspace directory.              │
+│                                                                              │
+│      Args:                                                                   │
+│          relative_path: The folder to list, relative to the workspace root.  │
+│      """                                                                     │
+│      try:                                                                    │
+│          target_path = os.path.abspath(os.path.join(WORKSPACE_ROOT,          │
+│  relative_path))                                                             │
+│          if not target_path.startswith(os.path.abspath(WORKSPACE_ROOT)):     │
+│              return "Error: Cannot explore directories outside the           │
+│  workspace."                                                                 │
+│                                                                              │
+│          if not os.path.exists(target_path):                                 │
+│              return f"Error: Path '{relative_path}' does not exist."         │
+│                                                                              │
+│          if not os.path.isdir(target_path):                                  │
+│              return f"Error: Path '{relative_path}' is a file, not a         │
+│  directory."                                                                 │
+│                                                                              │
+│          entries = os.listdir(target_path)                                   │
+│          if not entries:                                                     │
+│              return f"Directory '{relative_path}' is empty."                 │
+│                                                                              │
+│          results = []                                                        │
+│          for entry in sorted(entries):                                       │
+│              full_entry = os.path.join(target_path, entry)                   │
+│              is_dir = os.path.isdir(full_entry)                              │
+│              marker = "📁" if is_dir else "📄"                               │
+│              results.append(f"{marker} {entry}")                             │
+│                                                                              │
+│          return f"Contents of '{relative_path}':\n" + "\n".join(results)     │
+│      except Exception as e:                                                  │
+│          return f"Error listing directory: {e}"                              │
+│                                                                              │
+│  def read_file(filename: str) -> str:                                        │
+│      """Reads the contents of a text file inside the workspace directory.    │
+│                                                                              │
+│      Args:                                                                   │
+│          filename: The path of the file to read, relative to the workspace   │
+│  root.                                                                       │
+│      """                                                                     │
+│      try:                                                                    │
+│          filepath = os.path.abspath(os.path.join(WORKSPACE_ROOT, filename))  │
+│          if not filepath.startswith(os.path.abspath(WORKSPACE_ROOT)):        │
+│              return "Error: Cannot read files outside the workspace."        │
+│                                                                              │
+│          if not os.path.exists(filepath):                                    │
+│              return f"Error: File '{filename}' does not exist."              │
+│                                                                              │
+│          if os.path.isdir(filepath):                                         │
+│              return f"Error: '{filename}' is a directory, not a file."       │
+│                                                                              │
+│          # Avoid reading massive files at once                               │
+│          file_size = os.path.getsize(filepath)                               │
+│          if file_size > 1 * 1024 * 1024:  # 1MB limit for safety             │
+│              return "Error: File is too large to read (max 1MB)."            │
+│                                                                              │
+│          with open(filepath, "r", encoding="utf-8", errors="ignore") as f:   │
+│              content = f.read()                                              │
+│          return f"--- Content of {filename}                                  │
+│  ---\n{content}\n-----------------------------"                              │
+│      except Exception as e:                                                  │
+│          return f"Error reading file: {e}"                                   │
+│                                                                              │
+│  def get_calculator_tool() -> FunctionTool:                                  │
+│      """Returns a LlamaIndex FunctionTool wrapping the calculate             │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=calculate,                                                       │
+│          name="calculator",                                                  │
+│          description="Useful for evaluating mathematical expressions and     │
+│  arithmetic calculations."                                                   │
+│      )                                                                       │
+│                                                                              │
+│  def get_web_search_tool() -> FunctionTool:                                  │
+│      """Returns a LlamaIndex FunctionTool wrapping the web_search            │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=web_search,                                                      │
+│          name="web_search",                                                  │
+│          description="Useful for searching the web for real-time             │
+│  information or questions you don't know the answer to."                     │
+│      )                                                                       │
+│                                                                              │
+│  def get_file_writer_tool() -> FunctionTool:                                 │
+│      """Returns a LlamaIndex FunctionTool wrapping the write_file            │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=write_file,                                                      │
+│          name="file_writer",                                                 │
+│          description="Useful for writing text content or agent reports into  │
+│  a file in the root workspace."                                              │
+│      )                                                                       │
+│                                                                              │
+│  def get_system_monitor_tool() -> FunctionTool:                              │
+│      """Returns a LlamaIndex FunctionTool wrapping the system_monitor        │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=system_monitor,                                                  │
+│          name="system_monitor",                                              │
+│          description="Useful for monitoring host system resources like CPU   │
+│  and RAM usage to verify machine load."                                      │
+│      )                                                                       │
+│                                                                              │
+│  def get_list_directory_tool() -> FunctionTool:                              │
+│      """Returns a LlamaIndex FunctionTool wrapping the list_directory        │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=list_directory,                                                  │
+│          name="list_directory",                                              │
+│          description="Useful for exploring the files and folders inside the  │
+│  local workspace root."                                                      │
+│      )                                                                       │
+│                                                                              │
+│  def get_read_file_tool() -> FunctionTool:                                   │
+│      """Returns a LlamaIndex FunctionTool wrapping the read_file             │
+│  utility."""                                                                 │
+│      return FunctionTool.from_defaults(                                      │
+│          fn=read_file,                                                       │
+│          name="read_file",                                                   │
+│          description="Useful for reading text file content inside the        │
+│  workspace root."                                                            │
+│      )                                                                       │
+│                                                                              │
+│  def get_all_tools(include_file_writer: bool = True) -> list:                │
+│      """Returns a list of all standard tools available to agents.            │
+│                                                                              │
+│      Args:                                                                   │
+│          include_file_writer: If True, includes the file writer tool in the  │
+│  list.                                                                       │
+│      """                                                                     │
+│      tools = [                                                               │
+│          get_calculator_tool(),                                              │
+│          get_web_search_tool(),                                              │
+│          get_system_monitor_tool(),                                          │
+│          get_list_directory_tool(),                                          │
+│          get_read_file_tool()                                                │
+│      ]                                                                       │
+│      if include_file_writer:                                                 │
+│          tools.append(get_file_writer_tool())                                │
+│      return tools                                                            │
+│                                                                              │
+│                                                                              │
+│  ```                                                                         │
+│                                                                              │
+│  === HOST SYSTEM TELEMETRY ===                                               │
+│  🧠 CPU Utilization: 11.2%                                                   │
+│  💾 Memory (RAM): 63.3% (9.94 GB / 24.00 GB)                                 │
+│                                                                              │
+│  Your Task: Organize this information into a beautifully structured, highly  │
+│  readable Markdown Developer Transcript. Clearly list the files discovered,  │
+│  present the code implementations, and display the hardware loads.           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+

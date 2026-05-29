@@ -1,0 +1,13 @@
+127.0.0.1 - - [28/May/2026 13:49:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:52:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:52:47] code 404, message File not found
+127.0.0.1 - - [28/May/2026 13:52:47] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+127.0.0.1 - - [28/May/2026 13:53:19] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:53:19] "GET /RUNBOOK.md HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:53:32] code 404, message File not found
+127.0.0.1 - - [28/May/2026 13:53:32] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+127.0.0.1 - - [28/May/2026 13:55:15] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:56:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 13:56:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [28/May/2026 19:45:08] code 404, message File not found
+127.0.0.1 - - [28/May/2026 19:45:08] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
